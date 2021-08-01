@@ -1,21 +1,19 @@
-class Solution{
+class Solution {
 public:
-    int ans=0;
-    void mila_kiya(TreeNode*root,int targetSum){
-        if(!root) return;
-        if(targetSum-root->val==0){
-            ans++;
+    bool hasPathSum(TreeNode* root, int targetSum){
+        if(!root) return  false;
+        if(!root->left and !root->right){
+            if(targetSum - root->val==0){
+                return true;
+            }
+            return false;
         }
-        mila_kiya(root->left,targetSum-root->val);
-        mila_kiya(root->right,targetSum-root->val);
-    }
-    int pathSum(TreeNode* root, int targetSum){
-        if(!root){
-            return ans;
+        if(root->left and hasPathSum(root->left,targetSum-root->val)){
+            return true;
         }
-        mila_kiya(root,targetSum);
-        pathSum(root->left,targetSum);
-        pathSum(root->right,targetSum);
-        return ans;
+        if(root->right and hasPathSum(root->right,targetSum-root->val)){
+            return true;
+        }
+        return false;
     }
 };

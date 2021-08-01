@@ -349,7 +349,27 @@ public:
             }
         }
     }
+    //here below is the prims algo and difference
+    //between prims and kruskals
 
+    //the prims algo state that just take one min 
+    //edge and first do operation on that min edge
+    //and take next minimum edge that is connected
+    //to that already taken edge and that min edge
+    //must  be connected to already taken edge
+    //and there must be no cyle present
+    //in it and if it is visited already avoid that edge
+    //ds stack->priority queue,visited hashmap,pair<src,dest>
+
+
+    //but in kruskal you can take any min edge and start
+    //traversing and start connected to it and making graph
+    //and after take any min edge and start connecting
+    //but this only works if we are using union find algo
+    //because union find states that we must not create 
+    //any cycle so this kruskal is valid only for 
+    //union find
+    //ds stack->sort edges based on weight,union find algo
 
     //prims minimum spanning tree
     //minimum edges to visit all nodes
@@ -360,11 +380,9 @@ public:
         pair<int,pair<int,int>> temp=pq.top();
         pq.pop();
         visited[temp.first]=true;
-        
         for(auto&it:l[temp.first]){
             pq.push({it.first,{temp.first,it.second}});
         }
-
         while(!pq.empty()){
             temp=pq.top();
             pq.pop();
@@ -378,14 +396,11 @@ public:
             }
         }
     }
-
-
     stack<int> s;
     //topological sort
     //we must mark all the nodes and its corresponding edges
     //as directional not bidirectional edges
     //not cyclic graph but DAG directed acyclic graph
-    
     void topological_sort(int src,unordered_map<int,bool>&visited){
         visited[src]=true;
         for(auto&it:l[src]){
@@ -393,7 +408,6 @@ public:
         }
         s.push(src);
     }
-
     void order_of_compilation(){
         unordered_map<int,bool> visited;
         for(auto&it:l){
@@ -404,8 +418,6 @@ public:
             s.pop();
         }
     }
-
-
     //just replace bfs queue with stack
     //then we will get iterative dfs traversal of
     //the tree
@@ -429,10 +441,6 @@ public:
     }
     
 };
-
-
-
-
 
 int32_t main(){
 	qubais_judge;

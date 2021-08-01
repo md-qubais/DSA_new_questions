@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-#define IOS ios_base::sync_with_stdio(false);  cin.tie(NULL)
+#define IOS ios_base::sync_with_stdio(false);  cin.tie(NULL); cout.tie(NULL);
 #define int long long
 #define endl "\n"
 #define pb push_back
@@ -16,4 +16,3 @@ int32_t main(){
 	IOS;
 	return 0;
 }
-
