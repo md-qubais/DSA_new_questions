@@ -1,1 +1,6 @@
-leetcode_Max_product_tree.cpp
+class Solution {
+public:
+    int maxProduct(TreeNode* root) {
+        
+    }
+};

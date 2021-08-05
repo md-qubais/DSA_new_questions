@@ -1,1 +1,2 @@
-total cost connecting all the cities using prims=>37
+10
+mohammed qubaisuddin
