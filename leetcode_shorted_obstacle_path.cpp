@@ -1,43 +1,51 @@
-int rows[]={1,-1,0,0};
-int cols[]={0,0,1,-1};
-class Solution {
+class Pair{
 public:
-    int shortestPath(vector<vector<int>>& grid, int k) {
-        queue<pair<pair<int,int>,pair<int,int>>> q;
-        bool visited[1000][1000]={0};
-        if(grid[0][0]!=0){
-        	return -1;
-        }
-        q.push({{0,0},{0,0}});
+    int r;
+    int c;
+    int k;
+    Pair(int r,int c,int k){
+        this->r=r;
+        this->c=c;
+        this->k=k;
+    }
+};
+class Solution{
+public:
+    bool visited[100][100][100]={false};
+    int shortestPath(vector<vector<int>>& grid, int obs){
+        queue<Pair> q;
+        q.push(Pair(0,0,0));
+        int level=0;
         while(!q.empty()){
-        	pair<pair<int,int>,pair<int,int>> temp=q.front();
-        	q.pop();
-        	if(temp.first.first==grid.size()-1 and temp.first.second==grid[0].size()-1){
-        		if(temp.second.first<=k){
-        			return temp.second.second;
-        		}
-        		continue;
-        	}
-        	if(temp.second.first>k){
-        		visited[temp.first.first][temp.first.second]=true;
-        		continue;
-        	}
-        	if(visited[temp.first.first][temp.second.second]){
-        		continue;
-        	}
-        	visited[temp.first.first][temp.first.second]=true;
-        	for(int k=0;k<4;k++){
-        		int r=temp.first.first+rows[k];
-        		int c=temp.first.second+cols[k];
-        		if(r<0 or c<0 or r>=grid.size() or c>=grid[0].size() or visited[r][c]){
-        			continue;
-        		}
-        		if(grid[r][c]==1){
-        			q.push({{r,c},{temp.second.first+1,temp.second.second+1}});
-        		}else{
-        			q.push({{r,c},{temp.second.first,temp.second.second+1}});
-        		}
-        	}
+            int size=q.size();
+            while(size--){
+                Pair temp=q.front();
+                q.pop();
+                if(temp.r==grid.size()-1 and temp.c==grid[0].size()-1){
+                    return level;
+                }
+                if(visited[temp.r][temp.c][temp.k]){
+                    continue;
+                }
+                visited[temp.r][temp.c][temp.k]=true;
+                int row_dir[]={1,-1,0,0};
+                int col_dir[]={0,0,1,-1};
+                for(int dir=0;dir<4;dir++){
+                    int row=temp.r+row_dir[dir];
+                    int col=temp.c+col_dir[dir];
+                    if(row<0 or col<0 or row>=grid.size() or col>=grid[row].size() ){
+                        continue;
+                    }
+                    if(grid[row][col]==1){
+                        if(!visited[row][col][temp.k+1] and temp.k+1 <= obs){
+                            q.push(Pair(row,col,temp.k+1));
+                        }
+                    }else{
+                        q.push(Pair(row,col,temp.k));
+                    }
+                }
+            }
+            level++;
         }
         return -1;
     }
