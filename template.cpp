@@ -14,5 +14,8 @@ using namespace std;
 int32_t main(){
 	qubais_judge;
 	IOS;
+	deque<int> q;
+	q.push_back(1);
+	q.push_back(2);
 	return 0;
 }

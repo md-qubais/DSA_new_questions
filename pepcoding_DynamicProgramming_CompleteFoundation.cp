@@ -11,7 +11,6 @@
 #define Minheap priority_queue<int,vector<int>,greater<int>>
 #define qubais_judge freopen("input.txt","r",stdin); freopen("output.txt","w",stdout)
 using namespace std;
-
 int32_t main(){
 	qubais_judge;
 	IOS;
