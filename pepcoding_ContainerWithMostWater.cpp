@@ -11,8 +11,29 @@
 #define Minheap priority_queue<int,vector<int>,greater<int>>
 #define qubais_judge freopen("input.txt","r",stdin); freopen("output.txt","w",stdout)
 using namespace std;
+int maxArea(vector<int>& height){
+	int s=0;
+	int e=height.size()-1;
+	int water=INT_MIN;
+	while(s<e){
+		water=max(water,(e-s)*min(height[s],height[e]));
+		if(height[s]<height[e]){
+			s++;
+		}else{
+            e--;
+        }
+    }
+    return water;
+}
 int32_t main(){
 	qubais_judge;
 	IOS;
+	int n;
+	cin>>n;
+	vector<int> height(n);
+	for(auto&it:height){
+		cin>>it;
+	}
+	cout<<maxArea(height)<<endl;
 	return 0;
 }
